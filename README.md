@@ -14,32 +14,35 @@ yarn add jcstore
 
 create store.
 
-```js
+```typescript
 
 import { createStore } from 'jcstore';
 
-const store = createStore({
+const initState = {
     count: 0,
     name: 'jinech',
     detail: {
         name: 'detail name',
         list: new Array(10).fill('').map((_, index) => ({ name: `name${index}` }))
     }
-});
+};
+
+const store = createStore();
 
 export default store;
+export type InitState = typeof initState;
 ```
 
 Use in the page.
 
-```jsx
+```tsx
 'use client'
 
 import { useStore } from 'jcstore';
-import store from '../store';
+import store, { InitState } from '../store';
 
 const A = () => {
-    const [state, setState] = useStore(store);
+    const [state, setState] = useStore<InitState>(store);
     return (
         <div>
             <h1>A</h1>
@@ -59,7 +62,7 @@ const A = () => {
     );
 };
 const B = () => {
-    const [state, setState] = useStore(store);
+    const [state, setState] = useStore<InitState>(store);
     return (
         <div>
             <h1>B</h1>
