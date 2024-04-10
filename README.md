@@ -39,10 +39,12 @@ Use in the page.
 'use client'
 
 import { useStore } from 'jcstore';
-import store, { InitState } from '../store';
+import store from './store';
+import type { InitState } from './store';
 
-const A = () => {
+const A = function() {
     const [state, setState] = useStore<InitState>(store);
+
     return (
         <div>
             <h1>A</h1>
@@ -61,8 +63,9 @@ const A = () => {
         </div>
     );
 };
-const B = () => {
+const B = function() {
     const [state, setState] = useStore<InitState>(store);
+
     return (
         <div>
             <h1>B</h1>
@@ -81,7 +84,7 @@ const B = () => {
     );
 };
 
-export default () => {
+export default function() {
     return (
         <div>
             <A />
